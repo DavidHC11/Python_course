@@ -58,7 +58,15 @@ ganador_hist[~(ganador_hist.Medal.isnull())].to_csv("Ganadores.csv",index=False)
 
 # COMMAND ----------
 
+# MAGIC %md # Competidores grafica
+# MAGIC 
+# MAGIC <br>
+# MAGIC 
+# MAGIC * Crea una gráfica de barras que represente a los 10 países con más medallas ganadas en orden de menor a mayor y que muestre los valores en cada barra
 
+# COMMAND ----------
+
+df.dropna().groupby(["NOC"]).agg({"Medal":"count"}).sort_values("Medal",ascending=False).head(10).sort_values("Medal").plot(kind="bar")
 
 # COMMAND ----------
 
