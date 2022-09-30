@@ -81,4 +81,20 @@ sns.barplot(data=calificaciones_bajas, x="school_name", y="Student ID", hue="gen
 
 # COMMAND ----------
 
+df["last_name"] = df["student_name"].map(lambda x: x.split(" ")[1])
+af = df.groupby(["school_name","last_name","transform_reading_score"]).agg({"Student ID":"count"}).reset_index()
+af = af[af["transform_reading_score"]=="excelente"]
+
+af["index"] = af["school_name"]+" "+af["last_name"]
+
+af = af.sort_values("Student ID").tail(50)
+
+# COMMAND ----------
+
+plt.figure(figsize = (33,8))
+plt.xticks(rotation=45)
+sns.barplot(data=af, x="index", y="Student ID")
+
+# COMMAND ----------
+
 
