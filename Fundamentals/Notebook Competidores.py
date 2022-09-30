@@ -70,23 +70,7 @@ df.dropna().groupby(["NOC"]).agg({"Medal":"count"}).sort_values("Medal",ascendin
 
 # COMMAND ----------
 
-
-
-# COMMAND ----------
-
-
-
-# COMMAND ----------
-
-
-
-# COMMAND ----------
-
-
-
-# COMMAND ----------
-
-
+# MAGIC %md #Grafica pay
 
 # COMMAND ----------
 
