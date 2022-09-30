@@ -1,6 +1,7 @@
 # Databricks notebook source
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 # COMMAND ----------
 
@@ -59,6 +60,24 @@ sns.barplot(data=calificaciones, x="transform_reading_score", y="Student ID", hu
 # COMMAND ----------
 
 sns.barplot(data=calificaciones, x="transform_math_score", y="Student ID", hue="gender")
+
+# COMMAND ----------
+
+calificaciones = df.groupby(["school_name","gender","transform_reading_score"]).agg({"Student ID":"count"}).reset_index()
+calificaciones = calificaciones[calificaciones["transform_reading_score"]=="excelente"]
+
+plt.figure(figsize = (33,8))
+sns.barplot(data=calificaciones, x="school_name", y="Student ID", hue="gender")
+
+# COMMAND ----------
+
+calificaciones_bajas = df.groupby(["school_name","gender","transform_reading_score"]).agg({"Student ID":"count"}).reset_index()
+calificaciones_bajas = calificaciones_bajas[(calificaciones_bajas["transform_reading_score"]=="regular") | (calificaciones_bajas["transform_reading_score"]=="reprobado")]
+
+# COMMAND ----------
+
+plt.figure(figsize = (33,8))
+sns.barplot(data=calificaciones_bajas, x="school_name", y="Student ID", hue="gender")
 
 # COMMAND ----------
 
